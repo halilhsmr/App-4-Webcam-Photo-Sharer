@@ -28,7 +28,8 @@ class FirstScreen(Screen):
         response = requests.get(url=url, headers=headers)
         if response.status_code == 200:
             self._download_image(text_input, response.content)
-
+        else:
+            print("bad response code for wikipedia GET request")
 
 
 class RootWidget(ScreenManager):
