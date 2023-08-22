@@ -11,7 +11,8 @@ class FirstScreen(Screen):
     def search_image(self):
         query = self.manager.current_screen.ids.user_query.text
         print(query)
-        self._search_query(query)
+        content = self._search_query(query)
+        self._download_image(query, content)
         self.manager.current_screen.ids.img.source = f'files/{query}.jpg'
 
     @staticmethod
@@ -27,7 +28,7 @@ class FirstScreen(Screen):
                                  'Chrome/56.0.2924.76 Safari/537.36'}
         response = requests.get(url=url, headers=headers)
         if response.status_code == 200:
-            self._download_image(text_input, response.content)
+            return response.content
         else:
             print("bad response code for wikipedia GET request")
 
